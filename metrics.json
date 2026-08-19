@@ -1,0 +1,20 @@
+{
+  "holdout_metrics": {
+    "holdout_start": "2025-09-06",
+    "holdout_end": "2025-10-31",
+    "holdout_rows": 8759,
+    "MAE": 152.9,
+    "RMSE": 666.36,
+    "MAPE_pct": 7.05
+  },
+  "feature_importance": {
+    "distance": 0.7962999939918518,
+    "equipment_enc": 0.05570000037550926,
+    "delivery_enc": 0.033900000154972076,
+    "pickup_enc": 0.033799998462200165,
+    "weight": 0.02239999920129776,
+    "month": 0.020999999716877937,
+    "doy": 0.020899999886751175,
+    "dow": 0.016100000590085983
+  }
+}
