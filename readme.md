@@ -25,21 +25,12 @@ This generates `scorer_results/candidate_december.png`.
 ## Approach
 
 **Validation strategy - time-based holdout, not random 80/20:**
-`train-test.csv` spans January–October 2025 and the real task (`validation.csv`)
-covers November–December 2025 — the future relative to training data. A random
-split would let later rows sit in training while earlier rows get held out,
-testing the model on data older than what it trained on, which leaks
-information and overstates accuracy. Instead, the last 8 weeks of
-`train-test.csv` (2025-09-06 to 2025-10-31) are held out as a stand-in
-"future," and the model is validated by predicting that window from
-everything before it.
+`train-test.csv` spans January-October 2025, and the real task (`validation.csv`)
+covers November–December 2025, the future relative to training data. A random split would let later rows sit in training while earlier rows get held out,
+testing the model on data older than what it trained on, which leaks information and overstates accuracy. Instead, the last 8 weeks of `train-test.csv` (2025-09-06 to 2025-10-31) are held out as a stand-in "future," and the model is validated by predicting that window from everything before it.
 
 **Model:** XGBoost regressor (500 trees, depth 5, learning rate 0.05).
-Distance, weight, equipment, pickup/delivery, and calendar features
-(month, day-of-week, day-of-year) are tabular with a strongly non-linear,
-interaction-heavy relationship to rate; XGBoost handles this natively
-without feature scaling and is the standard choice for pricing/rate
-prediction on structured data at this scale (~48K rows).
+Distance, weight, equipment, pickup/delivery, and calendar features (month, day-of-week (DOW), day-of-year (DOY)) are tabular with a strongly non-linear, interaction-heavy relationship to rate; XGBoost handles this natively without feature scaling and is the standard choice for pricing/rate prediction on structured data at this scale (~48K rows).
 
 **Feature selection - dropped `market_index` and `quote_signal`:**
 Both features showed near-zero raw correlation with `posted_rate` (~0.03–0.04).
