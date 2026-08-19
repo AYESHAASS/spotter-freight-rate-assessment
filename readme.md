@@ -11,8 +11,7 @@ python -m pip install -r requirements.txt
 python train_predict.py
 ```
 
-This trains the model, writes `validation_predictions.csv`, and fills
-`predicted_rate` into `data/december-chart-inputs.csv`.
+This trains the model, writes `validation_predictions.csv`, and fills `predicted_rate` into `data/december-chart-inputs.csv`.
 
 Then validate the outputs with Spotter's scorer:
 
